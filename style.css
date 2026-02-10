@@ -1,0 +1,1951 @@
+/* Базова стилізація */
+*  { margin: 0; padding: 0; box-sizing: border-box; }
+ul { list-style: none; }
+a  { color: inherit; text-decoration: none; }
+
+/* CSS-змінні */
+:root {
+	
+	/* Кольори  */
+  --primary-color: #3498db;             /* Основний колір */
+  --secondary-color: rgb(46,204,113);   /* Другорядний колір */
+  --accent-color: hsl(348, 83%, 47%);   /* Акцентний колір */
+  --text-color: #333;                   /* Основний колір тексту */
+  --bg-color: #ffffff;                  /* Основний фон сайту */
+  --dark-bg: #1a1a1a;                   /* Темний фон */
+
+	/* Шрифти */
+  --font-primary: 'Roboto', sans-serif;      /* Основний шрифт */
+  --font-heading: 'Montserrat', sans-serif; /* Шрифт заголовків */
+  --font-size-base: 16px;                   /* Базовий розмір */
+
+	/* Відступи */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+
+	/* Анімації */
+  --transition-speed: 0.3s;  /* Швидкість анімацій */
+
+	/* Тіні */
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 8px rgba(0,0,0,0.2);
+  --shadow-lg: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+/* Темна тема */
+[data-theme="dark"] {
+	--text-color: #f0f0f0;
+	--bg-color: #1a1a1a;
+	--accent-color: #e74c3c;  
+	--shadow-sm: 0 2px 4px rgba(0,0,0,0.5); 
+}
+
+
+/*** Базові глобальні стилі для текстового контенту та елементів посилань ***/
+
+/* Стиль для html */
+html {
+	font-size: 16px;
+	scroll-behavior: smooth;
+}
+
+/* Стиль для body */
+body{
+	font-family: var(--font-primary);
+	font-size: var(--font-size-base);
+	color: var(--text-color);
+	background-color: var(--bg-color);
+	line-height: 1.5;
+	margin:0;
+	padding:0;
+	transition: background-color var(--transition-speed) ease, 
+				color var(--transition-speed) ease;
+}
+
+/* Оформлення заголовків */
+h1, h2, h3, h4, h5, h6{
+	font-family:var(--font-heading);
+	font-weight:700;
+	line-height:1.2;
+	margin-bottom:var(--spacing-sm);
+	color:var(--primary-color);
+	transition: color var(--transition-speed) ease;
+}
+
+/* Оформлення заголовка 1 */
+h1 {
+	font-size: clamp(2rem, 5vw, 3rem);
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+}
+
+/* Оформлення заголовка 2 */
+h2 {
+	font-size: clamp(1.5rem, 4vw, 2.5rem);
+	font-variant: small-caps;
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Оформлення заголовка 3 */
+h3 {
+	font-size: clamp(1.2rem, 3vw, 1.8rem);
+	font-variant: small-caps;
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Оформлення параграфів */
+p {
+	margin-bottom: 1rem;
+	text-align: justify;
+	word-spacing: 0.1em; 
+	letter-spacing: 0.02em;
+	line-height: 1.6;
+}
+
+
+/** Посилання **/
+/* Оформлення посилань */
+a {
+	color: var(--primary-color);
+	text-decoration: none;
+	transition: color var(--transition-speed) ease;
+}
+
+/* Hover ефект для посилань та Фокус на посиланнях */
+a:hover, a:focus {
+  color: var(--accent-color);
+  text-decoration: underline;
+  outline: none; 
+}
+
+/* Відображення фокусу на посиланні */
+a:focus-visible {
+	outline: 2px solid var(--primary-color);
+	outline-offset: 2px;
+}
+
+/* Колір відвіданих посилань */
+a:visited {
+	color: var(--secondary-color);
+}
+
+
+/** Утиліти для тексту **/
+/* Центрування тексту */
+.text-center {
+	text-align: center;
+}
+
+/* Перетворення тексту у великі літери */
+.text-uppercase {
+	text-transform: uppercase;
+}
+
+/* Градієнтне виділення тексту */
+.text-highlight {
+	background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	display: inline-block;
+	padding: 0 2px;
+}
+
+
+/*** Оформлення header ***/
+
+/* Header */
+#header {
+	position: sticky;
+	top: 0;
+	width: 100%;
+	z-index: 1000;	
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--spacing-sm) var(--spacing-md);
+	background-color: rgba(255, 255, 255, 0.95);
+	border-bottom: 4px solid var(--primary-color);
+	box-shadow: var(--shadow-md);
+	backdrop-filter: blur(10px);
+	transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Навігаційна панель */
+.nav {
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
+    flex-wrap: wrap;   
+    width: min(100%, 1200px);    
+    margin: 0 auto;                  
+    gap: var(--spacing-sm);         
+}
+
+/* Логотип */
+.logo img{
+	border-radius:12px;
+	transform:scale(1);
+	transition: transform 0.3s ease;		
+}
+
+/* Логотип анімація */
+.logo img:hover {
+	transform: scale(0.95) rotate(-2deg);
+}
+
+/* Список навігації */
+nav ul {
+	list-style: none;
+	display: flex; 
+	gap: var(--spacing-md);
+	padding: 0;
+	margin: 0;
+}
+
+/* Посилання в навігації */
+nav a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.5rem 1rem;
+	border-radius: 5px;
+	transition: background-color 0.3s ease, 
+				color 0.3s ease, 
+				transform 0.3s ease;
+}
+
+/* Cтиль для пункту меню */
+nav a:hover,
+nav a.active {
+	background: var(--primary-color);
+	color: white;
+	transform: translateY(-3px);
+	text-decoration:none;
+}
+
+/* Перемикач теми */
+.theme-switch{
+	position:relative;
+	display:inline-block;
+	width: 60px;
+	height: 30px;
+	background: #ccc;
+	border-radius: 30px;
+	cursor: pointer;
+	transition: background 0.3s;
+}
+
+/* Ховаємо реальний checkbox */
+#theme-toggle {
+  display: none;
+}
+
+/* Круглий "повзунок" на перемикачі теми */
+.theme-switch::before{
+	content:'';
+	position:absolute;
+	top: 3px;
+	left: 3px;
+	width: 24px;
+	height: 24px;
+	background: white;
+	border-radius: 50%;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+	transition: transform 0.3s;
+}
+
+/* Змінюємо фон перемикача, коли чекбокс активний */
+#theme-toggle:checked ~ .theme-switch {
+  background: var(--primary-color);
+}
+
+/* Змінюємо рух повзунка, коли чекбокс активний */
+#theme-toggle:checked ~ .theme-switch::before {
+	transform: translateX(30px); 
+}
+
+/* Темна тема для шапки сайту */
+[data-theme="dark"] #header {
+	background-color: rgba(26, 26, 26, 0.95);
+}
+
+
+/*** Оформлення home ***/
+
+/* Контейнер home секції */
+#home{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	width: 100%;
+	background: linear-gradient(135deg, rgba(52,152,219,0.8), rgba(142,68,173,0.8));
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	color: white;
+}
+
+#home::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 80px;
+	pointer-events: none;
+	background-size: 100% 100%;
+}
+
+#home::after {
+	bottom: 0;
+	background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 2400 80' xmlns='http://www.w3.org/2000/svg'><path d='M0 40 C600 0 1800 80 2400 40 L2400 80 L0 80 Z' fill='%238e44ad'/></svg>") no-repeat bottom;
+}
+
+/* Контейнер внутрішнього контенту Hero */
+.hero-content{
+	position: flex;
+	z-index: 2;
+	max-width: 800px;
+	padding: 2rem;	
+	line-height: 1.5;
+}
+.hero-content p {
+	text-align: center;
+}
+
+/* Анімація заголовка - плавне появлення зверху вниз */
+@keyframes fadeInDown{
+	0% {
+	  opacity: 0;
+	  transform: translateY(-50px);
+	}
+	100% {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+}
+
+/* Стилі заголовка Hero */
+.hero h1{
+	font-size: clamp(2rem, 6vw, 4rem);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+	margin-bottom: 1rem;
+	animation: fadeInDown 1s ease-out;
+}
+
+/* Стилі підзаголовка Hero */
+.hero h2{
+	font-size: clamp(1rem, 3vw, 1.5rem);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+	margin-bottom: 1rem;
+	animation: fadeInUp 1s ease-out backwards;
+}
+
+
+/* Анімація підзаголовка - знизу вгору */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;                 
+    transform: translateY(20px); 
+  }
+  to {
+    opacity: 1;                 
+    transform: translateY(0);  
+  }
+}
+
+/* Оформлення кнопки */
+.hero-btn{
+	display: inline-block;
+	padding: 1rem 2.5rem; 
+	margin-top: 1rem;
+	border: 2px solid white;
+	border-radius: 50px;
+	color: white; 
+	text-transform: uppercase;
+	letter-spacing: 2px; 
+	font-weight: 700;
+	background: transparent;
+	box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
+	animation: pulse 3s ease-in-out infinite;
+	transition: 
+	background-color 0.3s ease,
+	color 0.3s ease,
+	transform 0.3s ease,
+	box-shadow 0.3s ease;
+
+}
+
+/* Вигляд кнопки при наведенні */
+.hero-btn:hover{
+	background: white;
+	color: var(--primary-color);
+	transform: translateY(-5px) scale(1.05);
+	box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+	text-decoration:none;
+}
+
+/* Вигляд активної кнопки */
+.hero-btn:active{
+	transform: translateY(-2px) scale(1.02);	
+}
+
+/* анімація кнопки */
+@keyframes pulse {
+	0%, 100% {
+		box-shadow: 0 5px 15px rgba(255,255,255,0.25);
+	}
+	50% {
+		box-shadow: 0 5px 22px rgba(255,255,255,0.45);
+	}
+}
+
+/* Декоративний псевдоелемент для Hero секції */
+.hero::before {
+	content: '';
+  
+	position: absolute;
+	top: -50%;
+	right: -10%;
+	width: clamp(300px, 50vw, 500px);
+	height: clamp(300px, 50vw, 500px);
+	background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+	border-radius: 50%;
+	animation: float 6s ease-in-out infinite;
+	z-index: 1;
+}
+
+/* Анімація повільного "плавання" та легкого обертання */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-30px) rotate(10deg);
+  }
+}
+
+
+/*** About секція ***/
+/* Контейнер секції About */
+#about{
+	padding: var(--spacing-lg) var(--spacing-md);
+}
+
+/* Хвилястий нижній бордер для секції About */
+#about {
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: #f8f9fa;
+  position: relative;
+  overflow: hidden; 
+}
+
+#about::before,
+#about::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 80px;
+	pointer-events: none;
+	background-size: 100% 100%;
+}
+
+#about::before {
+	top: 0;
+	background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 2400 80' xmlns='http://www.w3.org/2000/svg'><path d='M0 40 C600 80 1800 0 2400 40 L2400 0 L0 0 Z' fill='%238e44ad'/></svg>") no-repeat top;
+}
+
+#about::after {
+	bottom: 0;
+	background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 2400 80' xmlns='http://www.w3.org/2000/svg'><path d='M0 40 C600 0 1800 80 2400 40 L2400 80 L0 80 Z' fill='%238e44ad'/></svg>") no-repeat bottom;
+}
+
+
+/* Заголовок секції */
+#about > h2 {
+	text-align: center;
+	margin-bottom: var(--spacing-lg);
+}
+
+
+/* Контейнер для фото і тексту */
+.about-container {
+	display: flex;        
+	align-items: center;    
+	gap: var(--spacing-lg);  
+	max-width: 1200px;      
+	margin: 0 auto;       
+	flex-wrap: wrap; 
+}
+
+/* Фото профілю */
+.about-image {
+	flex: 1;          
+	max-width: 300px;  
+}
+
+/* Стилі зображення */
+.about-image img {
+	width: 100%;               
+	height: auto;              
+	border-radius: 50%;       
+	border: 5px solid rebeccapurple; 
+	box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+	filter: grayscale(0%) brightness(1.05) contrast(1.1); 
+	transition: transform 0.5s ease, 
+              box-shadow 0.5s ease, 
+              filter 0.5s ease;
+ 
+}
+
+.about-image img:hover {
+	filter: grayscale(0%) brightness(1.1) contrast(1.2);
+	transform: scale(1.03);
+	box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+/* Текстова частина About */
+.about-text {
+	flex: 1;
+}
+
+/* Підзаголовок тексту */
+.about-text h3 {
+	margin-bottom: var(--spacing-md);
+	position: relative;
+	display: inline-block;
+}
+
+.about-text h3::after {
+	content: '';
+	position: absolute;
+	bottom: -10px;
+	left: 0;
+	width: 60px;
+	height: 4px;
+	background: var(--accent-color);
+	border-radius: 2px;
+}	
+
+/* Параграфи тексту */
+.about-text p {
+	margin-bottom: 1rem;
+	line-height: 1.6;
+	text-align: left;
+}
+
+/* Контейнер соцмереж */
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+/* Кнопки соцмереж */
+.social-links a[data-network] {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 90px;
+	height: 45px;
+	border-radius: 16px;
+	border: 3px solid rebeccapurple;
+	background: transparent;
+	color: var(--primary-color);
+	transition: 
+	transform 0.3s ease,
+	box-shadow 0.3s ease,
+	color 0.3s ease,
+	border-color 0.3s ease;
+	position: relative;
+	overflow: hidden;
+}
+
+
+.social-links a {
+	position: relative;
+	z-index: 0;
+}
+
+/* Псевдоелемент для анімації фону кнопки */
+.social-links a::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: var(--primary-color);
+	transform: translateY(100%);
+	transition: transform 0.3s ease;
+	z-index: -1;
+}
+
+/* Hover ефекти для кнопок */
+.social-links a:hover::before {
+	transform: translateY(0);
+}
+
+.social-links a:hover {
+	color: #fff;
+	transform: translateY(-4px);
+	box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+	text-decoration:none;
+}
+
+/* Індивідуальні кольори для соцмереж */
+.social-links a[data-network="github"]:hover,
+.social-links a[data-network="github"]:hover::before {
+	background: #0077b5;
+	border-color: #0077b5;
+}
+
+.social-links a[data-network="linkedin"]:hover,
+.social-links a[data-network="linkedin"]:hover::before {
+	background: #0077b5;
+	border-color: #0077b5;
+}
+
+.social-links a[data-network="instagram"]:hover,
+.social-links a[data-network="instagram"]:hover::before {
+	background: #0077b5;
+	border-color: #0077b5;
+}
+.social-links a[data-network="twitter"]:hover,
+.social-links a[data-network="twitter"]:hover::before {
+	background: #0077b5;
+	border-color: #0077b5;
+}
+
+.social-links a[data-network="email"]:hover,
+.social-links a[data-network="email"]:hover::before {
+	background: #0077b5;
+	border-color: #0077b5;
+}
+
+
+
+/*** Секція skills ***/
+/* Загальна структура секції */
+#skills {
+	padding: var(--spacing-lg) var(--spacing-md);
+	background: #f8f9fa;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Заголовок */
+#skills h2 {
+	text-align: center;
+	margin-bottom: var(--spacing-lg);
+}
+
+#skills::before,
+#skills::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 80px;
+	pointer-events: none;
+	background-size: 100% 100%;
+}
+
+#skills::before {
+	top: 0;
+	background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 2400 80' xmlns='http://www.w3.org/2000/svg'><path d='M0 40 C600 80 1800 0 2400 40 L2400 0 L0 0 Z' fill='%238e44ad'/></svg>") no-repeat top;
+}
+
+#skills::after {
+	bottom: 0;
+	background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 2400 80' xmlns='http://www.w3.org/2000/svg'><path d='M0 40 C600 0 1800 80 2400 40 L2400 80 L0 80 Z' fill='%238e44ad'/></svg>") no-repeat bottom;
+}
+
+/* Контейнер для skills */
+.skills-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: var(--spacing-md);
+	max-width: 1200px;
+	margin: 0 auto;
+
+}
+
+/* Стиль картки */
+.skill-card {
+	background: white;
+	padding: var(--spacing-md);
+	border-radius: 15px;
+	border: 1px solid #e0e0e0;
+	box-shadow: var(--shadow-sm);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Hover-ефект картки */
+.skill-card:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* Верхня лінія картки для візуального розділення */
+.skill-card:nth-child(1) {
+	border-top: 4px solid #e74c3c; /* HEX */
+}
+
+.skill-card:nth-child(2) {
+	border-top: 4px solid rgb(52, 152, 219); /* RGB */
+}
+
+.skill-card:nth-child(3) {
+	border-top: 4px solid hsl(142, 71%, 45%); /* HSL */
+}
+
+.skill-card:nth-child(4) {
+	border-top: 4px solid rgba(155, 89, 182, 1); /* RGBA */
+}
+
+.skill-card:nth-child(5) {
+	border-top: 4px solid hsla(24, 100%, 50%, 1); /* HSLA */
+}
+
+.skill-card:nth-child(6) {
+	border-top: 4px solid #16a085;
+}
+
+.skill-card:nth-child(7) {
+	border-top: 4px solid hsl(50,100%,50%);
+}
+
+.skill-card:nth-child(8) {
+	border-top: 4px solid hsl(40,100%,50%);
+}
+
+/* Заголовок skill */
+.skill-card h3 {
+	margin-bottom: 1rem;   
+	color: var(--text-color);  
+	display: flex;           
+	align-items: center;    
+	gap: 0.5rem;            
+}
+
+/* Іконка перед заголовком */
+.skill-card h3::before {
+	content: '⚡';             
+	font-size: 1.5rem;            
+}
+
+/* Контейнер смуги прогресу */
+.progress-bar {
+	width: 100%; 
+	height: 25px;   
+	background: #e0e0e0; 
+	border-radius: 25px; 
+	overflow: hidden;  
+	margin: 1rem 0; 
+	position: relative; 
+	box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); 
+}
+
+/* Заповнення смуги прогресу */
+.progress-fill {
+	height: 100%; 
+	background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+	border-radius: 25px;
+	transform-origin: left;
+	animation: fillBar 2s ease-out forwards;
+	position: relative;
+}
+
+/* Анімації для конкретного відсотка прогресу */
+.progress-fill[data-progress="90"] { width: 0;animation: fillTo90 3s ease-out forwards; }
+.progress-fill[data-progress="85"] { width: 0;animation: fillTo85 3s ease-out forwards; }
+.progress-fill[data-progress="80"] { width: 0;animation: fillTo80 3s ease-out forwards; }
+.progress-fill[data-progress="75"] { width: 0;animation: fillTo75 3s ease-out forwards; }
+.progress-fill[data-progress="70"] { width: 0;animation: fillTo70 3s ease-out forwards; }
+.progress-fill[data-progress="65"] { width: 0;animation: fillTo65 3s ease-out forwards; }
+.progress-fill[data-progress="60"] { width: 0;animation: fillTo60 3s ease-out forwards; }
+.progress-fill[data-progress="55"] { width: 0;animation: fillTo55 3s ease-out forwards; }
+
+/* Ключові кадри для анімації заповнення */
+@keyframes fillTo90 { to { width: 90%; } }
+@keyframes fillTo85 { to { width: 85%; } }
+@keyframes fillTo80 { to { width: 80%; } }
+@keyframes fillTo75 { to { width: 75%; } }
+@keyframes fillTo70 { to { width: 70%; } }
+@keyframes fillTo65 { to { width: 65%; } }
+@keyframes fillTo60 { to { width: 60%; } }
+@keyframes fillTo55 { to { width: 55%; } }
+
+/* Відображення відсотка всередині смуги прогресу */
+.progress-fill::after {
+  content: attr(data-progress) '%';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+
+.skill-card p {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Анімації карток навиків: парні та непарні */
+.skill-card:nth-of-type(even) {
+  animation: fadeInRight 1s ease-out;
+}
+
+.skill-card:nth-of-type(odd) {
+  animation: fadeInLeft 1s ease-out;
+}
+
+/* Анімація появи зліва */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Анімація появи справа */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/*** Секція portfolio ***/
+/* Відступи, фон і позиціонування для псевдоелементів */
+#portfolio {
+   padding: var(--spacing-lg) var(--spacing-md);
+   background: #f8f9fa;
+   position: relative;
+   overflow: hidden;
+}
+
+/* Заголовок секції портфоліо */
+#portfolio h2 {
+   text-align: center;
+   margin-bottom: var(--spacing-lg);
+}
+
+#portfolio::before,
+#portfolio::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 80px;
+	pointer-events: none;
+	background-size: 100% 100%;
+}
+
+#portfolio::before {
+	top: 0;
+	background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 2400 80' xmlns='http://www.w3.org/2000/svg'><path d='M0 40 C600 80 1800 0 2400 40 L2400 0 L0 0 Z' fill='%238e44ad'/></svg>") no-repeat top;
+}
+
+#portfolio::after {
+	bottom: 0;
+	background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 2400 80' xmlns='http://www.w3.org/2000/svg'><path d='M0 40 C600 0 1800 80 2400 40 L2400 80 L0 80 Z' fill='%238e44ad'/></svg>") no-repeat bottom;
+}
+
+/* Контейнер сітки проектів */
+.portfolio-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+   gap: var(--spacing-md);
+   max-width: 1200px;
+   margin: 0 auto;
+}
+
+/* Картка проекту */
+.project-card {
+   position: relative;
+   overflow: hidden;
+   border-radius: 15px;
+   box-shadow: var(--shadow-md);
+   display: block;
+   transition: all 0.3s ease;
+   background: white;
+   height: 300px;
+}
+
+/* Ефект при наведенні на картку */
+.project-card:hover {
+   transform: translateY(-10px) scale(1.02);
+   box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+/* Зображення всередині картки */
+.project-card img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   filter: brightness(0.9) contrast(1.1);
+   transition: all 0.5s ease;
+}
+
+/* Overlay для проекту */
+.project-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	
+	background: linear-gradient(
+    to bottom,
+    rgba(52, 152, 219, 0.9),
+    rgba(142, 68, 173, 0.9)
+	);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	
+	padding: 2rem;
+	color: white;
+
+	opacity: 0;
+
+	transition: opacity 0.4s ease;
+}
+
+/* Hover ефект для появи overlay */
+.project-card:hover .project-overlay {
+	opacity: 1;
+}
+
+/* Заголовок всередині overlay */
+.project-overlay h3 {
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	margin-bottom: 1rem;
+  
+	transform: translateY(-20px);
+	transition: transform 0.4s ease 0.1s;
+	color:red;
+}
+
+/* Hover ефект заголовка всередині overlay */
+.project-card:hover .project-overlay h3 {
+	transform: translateY(0);
+}
+
+/* Параграфи всередині overlay */
+.project-overlay p {
+	font-size: 0.95rem;
+	margin-bottom: 1.5rem;
+	line-height: 1.5;
+
+	transform: translateY(20px);
+	transition: transform 0.4s ease 0.2s;
+}
+
+/* Hover ефект для параграфів */
+.project-card:hover .project-overlay p {
+	transform: translateY(0);
+}
+
+/* Кнопки всередині overlay */
+.project-overlay a{
+	display: inline-block;
+	padding: 0.8rem 2rem;
+	border: 2px solid white;
+	border-radius: 30px;
+	color: white;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: transparent;
+	transform: scale(0.8);
+	transition: all 0.3s ease 0.3s;
+}
+
+/* Hover ефект для кнопок */
+.project-card:hover .project-overlay a {
+  transform: scale(1);
+}
+
+/* Hover ефект при наведені на кнопки */
+.project-overlay a:hover {
+  background: white;
+  color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+/* Модальне вікно */
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: rgba(0, 0, 0, 0.9);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s ease;
+	padding: 2rem;
+}
+
+/* Показ модального вікна через :target */
+.modal:target {
+	opacity: 1;
+	visibility: visible;
+}
+
+/* Контейнер контенту модального вікна */
+.modal-content {
+	background: white;
+	border-radius: 20px;
+	padding: var(--spacing-lg);
+	max-width: 800px;
+	width: 100%;
+	max-height: 90vh;
+	overflow-y: auto;
+	position: relative;
+	transform: scale(0.8);
+	transition: transform 0.3s ease;
+}
+
+/* Анімація збільшення контенту при відкритті */
+.modal:target .modal-content {
+	transform: scale(1);
+}
+
+/* Кнопка закриття модального вікна */
+.modal .close {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	font-size: 2rem;
+	font-weight: bold;
+	color: var(--text-color);
+	text-decoration: none;
+	transition: all 0.3s ease;
+}
+
+/* Hover ефект для кнопки закриття */
+.modal .close:hover {
+	color: var(--accent-color);
+	transform: scale(1.1);
+}
+
+/* Зображення всередині модального вікна */
+.modal-content img {
+	width: 70%;
+	height: auto;
+	border-radius: 10px;
+	margin-bottom: var(--spacing-md);
+}
+
+/* Список технологій/тегів всередині модального вікна */
+.modal-content ul {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin: var(--spacing-sm) 0;
+}
+
+/* Елементи списку технологій/тегів */
+.modal-content li {
+	padding: 0.5rem 1rem;
+	border-radius: 20px;
+	background: var(--primary-color);
+	color: white;
+	font-size: 0.85rem;
+}
+
+/* Категорії проектів – веб */
+.project-card[data-category="web"] {
+	border-bottom: 4px solid #3498db;
+}
+
+/* Категорії проектів – дизайн */
+.project-card[data-category="design"] {
+	border-bottom: 4px solid #e74c3c;
+}
+
+/* Категорії проектів – адаптивні */
+.project-card[data-category="responsive"] {
+	border-bottom: 4px solid #2ecc71;
+}
+
+
+/*** Секція timeline ***/
+#timeline {
+	padding: var(--spacing-lg) var(--spacing-md);
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Заголовок секції */
+#timeline h2 {
+	text-align: center;
+	margin-bottom: var(--spacing-lg);
+	color: white;
+}
+
+#timeline::before,
+#timeline::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 80px;
+	pointer-events: none;
+	background-size: 100% 100%;
+}
+
+#timeline::before {
+	top: 0;
+	background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 2400 80' xmlns='http://www.w3.org/2000/svg'><path d='M0 40 C600 80 1800 0 2400 40 L2400 0 L0 0 Z' fill='%238e44ad'/></svg>") no-repeat top;
+}
+
+#timeline::after {
+	bottom: 0;
+	background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 2400 80' xmlns='http://www.w3.org/2000/svg'><path d='M0 40 C600 0 1800 80 2400 40 L2400 80 L0 80 Z' fill='%238e44ad'/></svg>") no-repeat bottom;
+}
+
+
+/* Контейнер елементів хронології */
+.timeline-container {
+	position: relative;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 2rem 0;
+}
+
+/* Вертикальна лінія посередині timeline */
+.timeline-container::before {
+	content: '';
+	position: absolute;
+	left: 50%;
+	top: 0;
+	bottom: 0;
+	width: 4px;
+	background: rgba(255, 255, 255, 0.3);
+	transform: translateX(-50%);
+	z-index: 1;
+}
+
+/* Елемент хронології */
+.timeline-item {
+	position: relative;
+	margin-bottom: var(--spacing-lg);
+	display: flex;
+	align-items: center;
+}
+
+/* Елементи з непарним порядком – ліворуч */
+.timeline-item:nth-child(odd) {
+	justify-content: flex-start;
+}
+
+
+.timeline-item:nth-child(odd) .timeline-content {
+	margin-right: calc(50% + 40px);
+	text-align: right;
+}
+
+/* Елементи з парним порядком – праворуч */
+.timeline-item:nth-child(even) {
+	justify-content: flex-end;
+}
+
+
+.timeline-item:nth-child(even) .timeline-content {
+	margin-left: calc(50% + 40px);
+	text-align: left;
+}
+
+/* Маркер події */
+.timeline-marker{
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 30px;
+	height: 30px;
+	background: white;
+	border-radius: 50%;
+	border: 4px solid var(--accent-color);
+	box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.2);
+	z-index: 2;
+	transition: all 0.3s ease;
+}
+
+/* Hover ефект маркера */
+.timeline-item:hover .timeline-marker {
+	transform: translateX(-50%) scale(1.3);
+	background: var(--accent-color);
+	box-shadow: 0 0 0 12px rgba(255, 255, 255, 0.3);
+}
+
+/* Пульсуюче кільце навколо маркера */
+.timeline-marker::before {
+	content: '';
+	position: absolute;
+	top: -8px;
+	left: -8px;
+	right: -8px;
+	bottom: -8px;
+	border-radius: 50%;
+	border: 2px solid rgba(255, 255, 255, 0.5);
+	animation: pulse-ring 2s infinite;
+}
+
+/* Анімація пульсуючого кільця */
+@keyframes pulse-ring { 
+	0% {
+	  transform: scale(1);
+	  opacity: 1;
+	}
+	100% {
+	  transform: scale(1.5);
+	  opacity: 0;
+	}
+ }
+
+/* Контент події timeline */
+.timeline-content {
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+	padding: var(--spacing-md);
+	border-radius: 15px;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+	max-width: 45%;
+	position: relative;
+	transition: all 0.3s ease;	
+}
+
+/* Hover ефект для картки події */
+.timeline-content:hover {
+	background: rgba(255, 255, 255, 0.2);
+	transform: translateY(-5px);
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Стрілка для контенту зліва (непарні елементи) */
+.timeline-item:nth-child(odd) .timeline-content::after {
+	content: '';
+	position: absolute;
+	right: -15px;
+	top: 20px;
+	border: 15px solid transparent;
+	border-left-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Стрілка для контенту справа (парні елементи) */
+.timeline-item:nth-child(even) .timeline-content::after {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 20px;
+  border: 15px solid transparent;
+  border-right-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Дата події */
+.timeline-content time {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* Заголовок події */
+.timeline-content h3 {
+  margin: 0.5rem 0;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Підзаголовок / місце або роль */
+.timeline-content h4 {
+  margin: 0.5rem 0;
+  opacity: 0.8;
+  font-weight: 400;
+  font-style: italic;
+  color:var(--accent-color);
+}
+
+/* Анімація появи елементів timeline */
+.timeline-item {
+  animation: fadeInTimeline 0.6s ease-out backwards;
+}
+
+/* Затримка анімації для кожного елемента */
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.2s; }
+.timeline-item:nth-child(3) { animation-delay: 0.3s; }
+.timeline-item:nth-child(4) { animation-delay: 0.4s; }
+
+/* Ключові кадри анімації появи */
+@keyframes fadeInTimeline {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/*** Секція stats ***/
+#stats {
+	padding: var(--spacing-lg) var(--spacing-md);
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+	position: relative;
+	overflow: hidden;
+}
+
+.visually-hidden{
+	text-align: center;
+	margin-bottom: var(--spacing-lg);
+	color: white;
+}
+
+#stats::before,
+#stats::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 80px;
+	pointer-events: none;
+	background-size: 100% 100%;
+}
+
+#stats::before {
+	top: 0;
+	background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 2400 80' xmlns='http://www.w3.org/2000/svg'><path d='M0 40 C600 80 1800 0 2400 40 L2400 0 L0 0 Z' fill='%238e44ad'/></svg>") no-repeat top;
+}
+
+#stats::after {
+	bottom: 0;
+	background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 2400 80' xmlns='http://www.w3.org/2000/svg'><path d='M0 40 C600 0 1800 80 2400 40 L2400 80 L0 80 Z' fill='%238e44ad'/></svg>") no-repeat bottom;
+}
+
+
+
+/* Контейнер елементів статистики */
+.stats-container {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	gap: var(--spacing-md);
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+/* Елемент статистики */
+.stat-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	flex: 1;
+	min-width: 200px;
+	padding: var(--spacing-md);
+	border-radius: 15px;
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+	transition: all 0.3s ease;
+}
+
+/* Hover-ефект для елемента статистики */
+.stat-item:hover {
+	background: rgba(255, 255, 255, 0.2);
+	transform: translateY(-10px) scale(1.05);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Іконка статистики */
+.stat-icon {
+	width: 80px;
+	height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 50%;
+	margin-bottom: 1rem;
+	font-size: 2.5rem;
+	animation: bounce 2s infinite;
+}
+
+/* Анімація вертикального руху */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Іконка для 1-4 елементи */
+.stat-item:nth-child(1) .stat-icon::before {
+	content: '🚀';
+}
+
+.stat-item:nth-child(2) .stat-icon::before {
+	content: '⏱️';
+}
+
+.stat-item:nth-child(3) .stat-icon::before {
+	content: '👥';
+}
+
+.stat-item:nth-child(4) .stat-icon::before {
+	content: '💯';
+}
+
+/* Числове значення статистики */
+.stat-number {
+	font-size: clamp(2rem, 5vw, 3.5rem);
+	font-weight: 700;  
+	margin: 0.5rem 0;  
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	position: relative;
+	animation: countUp 2s ease-out;
+}
+
+/* Анімація появи чисел */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Додає символ + після числа */
+.stat-number[data-target="50"]::after {
+	content: '+';
+}
+
+/* Додає символ + після числа */
+.stat-number[data-target="100"]::after {
+	content: '%';
+}
+
+/* Підпис під числом статистики */
+.stat-label {
+	font-size: 1.1rem;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	opacity: 0.9;
+}
+
+/* Контейнер статистики для керування шаром */
+.stats-container {
+	position: relative;
+	z-index: 1;
+}
+
+/* Розміри та внутрішні відступи елемента статистики */
+.stat-item {
+	padding: calc(var(--spacing-sm) * 2);
+	min-width: min(200px, 100%);
+	max-width: max(250px, 20vw);
+}
+
+/*** Секція contact ***/
+#contact {
+	padding: var(--spacing-lg) var(--spacing-md);
+	background: #f8f9fa;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Заголовок секції */
+#contact h2 {
+	text-align: center;
+	margin-bottom: var(--spacing-lg);
+}
+
+#contact::before,
+#contact::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 80px;
+	pointer-events: none;
+	background-size: 100% 100%;
+}
+
+#contact::before {
+	top: 0;
+	background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 2400 80' xmlns='http://www.w3.org/2000/svg'><path d='M0 40 C600 80 1800 0 2400 40 L2400 0 L0 0 Z' fill='%238e44ad'/></svg>") no-repeat top;
+}
+
+#contact::after {
+	bottom: 0;
+	background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 2400 80' xmlns='http://www.w3.org/2000/svg'><path d='M0 40 C600 0 1800 80 2400 40 L2400 80 L0 80 Z' fill='%238e44ad'/></svg>") no-repeat bottom;
+}
+
+
+/* Контейнер форми */
+.contact-container {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+/* Обгортка контактної форми */
+.contact-form {
+	background: white;
+	padding: var(--spacing-lg);
+	border-radius: 20px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Група поля форми */
+.form-group {
+	position: relative;
+	margin-bottom: var(--spacing-md);
+}
+
+/* Лейбл з плаваючим ефектом */
+.form-group label {
+	position: absolute;
+	top: 50%;
+	left: 1rem;
+	transform: translateY(-50%);
+	font-size: 1rem;
+	color: rgba(0, 0, 0, 0.5);
+	transition: all 0.3s ease;
+	pointer-events: none;
+	background: #f8f9fa;
+	border-radius:15px;
+	padding: 0 0.5rem;
+}
+
+/* Поля введення та textarea */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group select,
+.form-group textarea {
+	width: 100%;
+	padding: 1rem;
+	border: 2px solid #e0e0e0;
+	border-radius: 10px;
+	outline: none;
+	font-size: 1rem;
+	font-family: var(--font-primary);
+	transition: all 0.3s ease;
+	background: #fafafa;
+}
+
+/* Стилі полів у фокусі */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+	border-color: var(--primary-color);
+	box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+	background: white;
+}
+
+/* Плаваючий лейбл при фокусі або введеному значенні */
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group select:focus + label,
+.form-group textarea:focus + label,
+.form-group textarea:not(:placeholder-shown) + label {
+	transform: translateY(-2.5rem) scale(0.85);
+	color: var(--primary-color);
+	font-weight: 600;
+}
+
+/* Налаштування textarea */
+.form-group textarea {
+	min-height: 150px;
+	resize: vertical;
+}
+
+/* Початкове положення лейбла для textarea */
+.form-group textarea + label {
+	top: 1.5rem;
+	transform: translateY(0);
+}
+
+/* Стилі select */
+.form-group select {
+	cursor: pointer;
+	appearance: none;
+	position: relative;
+}
+
+/* Іконка стрілки для select */
+.form-group select + label::after {
+	content: '▼';
+	position: absolute;
+	right: 3rem;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+	color: var(--primary-color);
+}
+
+.form-group input:required:valid,
+.form-group textarea:required:valid {
+	border-color: #2ecc71;
+}
+
+.form-group input:required:invalid,
+.form-group textarea:required:invalid {
+	border-color: rgba(231, 76, 60, 0.8);
+}
+
+/* Позначка обовʼязкового поля */
+.form-group input:required + label::after,
+.form-group textarea:required + label::after {
+	content: '*';
+	color: var(--accent-color);
+	margin-left: 0.2rem;
+}
+
+/* Кнопка відправки форми */
+.contact-form button[type="submit"] {
+	width: 100%;
+	padding: 1.2rem 2rem;
+	border: none;
+	border-radius: 10px;
+	background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+	color: white;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 700;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+	position: relative;
+	overflow: hidden;
+}
+
+/* Hover ефект кнопки */
+.contact-form button[type="submit"]:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* Активний стан кнопки */
+.contact-form button[type="submit"]:active {
+	transform: translateY(0);
+}
+
+/* Вимкнений стан кнопки */
+.contact-form button[type="submit"]:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	transform: none;
+}
+
+/* Псевдоелемент для ripple-ефекту */
+.contact-form button[type="submit"]::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.5);
+	transform: translate(-50%, -50%);
+	transition: width 0.6s, height 0.6s;
+}
+
+/* Ripple-ефект кнопки при натисканні */
+.contact-form button[type="submit"]:active::before {
+	width: 300px;
+	height: 300px;
+}
+
+/* Стиль підказок в полях вводу */
+::placeholder {
+	color: rgba(0, 0, 0, 0.4);
+	font-style: italic;
+}
+
+/* При фокусі placeholder зникає */
+input:focus::placeholder,
+textarea:focus::placeholder {
+	opacity: 0;
+}
+
+
+/*** Футер сайту ***/
+footer {
+	background: linear-gradient(135deg, #2c3e50, #34495e);
+	color: white;
+	padding: var(--spacing-lg) var(--spacing-md) var(--spacing-sm);
+}
+
+/* Контейнер футера */
+.footer-content {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: var(--spacing-md);
+	max-width: 1200px;
+	margin: 0 auto var(--spacing-md) auto;
+}
+
+/* Колонки футера */
+.footer-column {
+	flex: 1;
+	min-width: 250px;
+	padding: var(--spacing-sm);
+}
+
+/* Заголовки колонок футера */
+.footer-column h3 {
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	margin-bottom: var(--spacing-sm);
+	padding-bottom: 0.5rem;
+	border-bottom: 2px solid var(--accent-color);
+	position: relative;
+}
+
+/* Декоративна лінія під заголовком */
+.footer-column h3::after {
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 50px;
+	height: 2px;
+	background: var(--primary-color);
+}
+
+/* Параграфи в колонках футера */
+.footer-column p {
+	line-height: 1.8;
+	font-size: 0.95rem;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+/* Список посилань футера */
+.footer-links {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}	
+
+/* Елементи списку футера */
+.footer-links li {
+	margin-bottom: 0.8rem;
+	position: relative;
+	padding-left: 1.5rem;
+}
+
+/* Стилізація маркера списку */
+.footer-links li::before {
+	content: '▸';
+	position: absolute;
+	left: 0;
+	color: var(--accent-color);
+	font-size: 1.2rem;
+	transition: transform 0.3s ease;
+}
+
+/* Анімація маркера при ховері */
+.footer-links li:hover::before {
+	transform: translateX(5px);
+}
+
+/* Посилання футера */
+.footer-links a {
+	color: rgba(255, 255, 255, 0.8);
+	text-decoration: none;
+	transition: all 0.3s ease;
+	position: relative;
+}
+
+/* Ефект hover для посилань */
+.footer-links a:hover {
+	color: var(--primary-color);
+	padding-left: 5px;
+}
+
+/* Лінія під посиланням при hover */
+.footer-links a::after {
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 0;
+	height: 2px;
+	background: var(--primary-color);
+	transition: width 0.3s ease;
+}
+
+/* Hover ефект для підкреслення посилань футера */
+.footer-links a:hover::after {
+	width: 100%;
+}
+
+/* Таблиця контактів */
+.contact-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.95rem;
+}
+
+/* Рядки таблиці */
+.contact-table tr {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Комірки таблиці */
+.contact-table td {
+	padding: 0.8rem 0.5rem;
+	vertical-align: top;
+}
+
+/* Перша колонка таблиці */
+.contact-table td:first-child {
+	font-weight: 600;
+	color: var(--primary-color);
+	width: 100px;
+}
+
+/* Друга колонка таблиці */
+.contact-table td:last-child {
+	color: rgba(255, 255, 255, 0.8);
+}
+
+/* Hover ефект для рядків таблиці */
+.contact-table tr:hover {
+	background: rgba(255, 255, 255, 0.05);
+}
+
+/* Контейнер іконок соцмереж */
+.social-icons {
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+/* Стилізація посилань соціальних іконок */
+.social-icons a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 85px;
+	height: 40px;
+	border-radius: 25%;
+	border: 3px solid rgba(255, 255, 255, 0.3);
+	background: transparent;
+	color: white;
+	transition: all 0.3s ease;
+	position: relative;
+	overflow: hidden;
+	text-decoration:none;
+}
+
+/* Ефект фону для соціальних іконок при hover */
+.social-icons a::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--primary-color);
+	transform: scale(0);
+	border-radius: 20%;
+	transition: transform 0.3s ease;
+	z-index: -1;
+}
+
+/* Анімація розкриття фону при hover */
+.social-icons a:hover::before {
+	transform: scale(1);
+}
+
+
+/* Hover ефект для самої іконки */
+.social-icons a:hover {
+	border-color: var(--primary-color);
+	color: white;
+	transform: translateY(-5px);
+	box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+/* Послідовне затримання анімації hover для кожної іконки */
+.social-icons a:nth-child(1) { transition-delay: 0s; }
+.social-icons a:nth-child(2) { transition-delay: 0.1s; }
+.social-icons a:nth-child(3) { transition-delay: 0.2s; }
+.social-icons a:nth-child(4) { transition-delay: 0.3s; }
+
+/* Нижній футер */
+.footer-bottom {
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	padding-top: var(--spacing-sm);
+	margin-top: var(--spacing-md);
+	text-align: center;
+	font-size: 0.9rem;
+	color: rgba(255, 255, 255, 0.6);
+}
+
+/* Параграфи у нижньому футері */
+.footer-bottom p {
+	margin: 0.5rem 0;
+}
+
+
+
+
