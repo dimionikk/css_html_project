@@ -1,5 +1,5 @@
 
-посилання на сайт: https://dimionikk.github.io/css_html_educational_web-_project/  
+Посилання на сайт: https://dimionikk.github.io/css_html_educational_web-_project/  
 Примітка: Уся інформація на сайті про автора вигадана. Цей проєкт створено виключно для практики та закріплення вивченого матеріалу.
 
 ---------
